@@ -5,6 +5,10 @@ import cors from "cors"
 import morgan from "morgan"
 import jobRoute from "./routes/jobRoutes.js"
 import applicationRoute from "./routes/applicationRoute.js"
+import courseRoute from "./routes/CourseRoute.js"
+import profileRoutes from "./routes/profileRoute.js"
+import authRouter from "./routes/authRoutes.js"
+
 
 dotenv.config()
 
@@ -14,6 +18,13 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use("/api/v1", jobRoute)
 app.use("/api", applicationRoute)
+app.use("/api/auth", authRouter)
+app.use("/api/courses", courseRoute)
+app.use("/api", profileRoutes);
+console.log(profileRoutes)
+
+
+
 
 
 const PORT = process.env.PORT || 3000
