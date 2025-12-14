@@ -8,6 +8,7 @@ import applicationRoute from "./routes/applicationRoute.js"
 import courseRoute from "./routes/CourseRoute.js"
 import profileRoutes from "./routes/profileRoute.js"
 import authRouter from "./routes/authRoutes.js"
+import adminRoutes from "./routes/adminRoutes.js"
 
 
 dotenv.config()
@@ -21,7 +22,7 @@ app.use("/api", applicationRoute)
 app.use("/api/auth", authRouter)
 app.use("/api/courses", courseRoute)
 app.use("/api", profileRoutes);
-console.log(profileRoutes)
+app.use("/api/admin", adminRoutes); // NEW: Admin routes
 
 
 
