@@ -268,7 +268,7 @@ export const sendVerificationEmail = async (recipientEmail, username, verificati
 
   sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL };
   sendSmtpEmail.to = [{ email: recipientEmail, name: username }];
-  sendSmtpEmail.subject = "Verify Your Email - Unix Platform";
+  sendSmtpEmail.subject = "Verify Your Email - IbonnI Systems";
   sendSmtpEmail.htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -291,12 +291,12 @@ export const sendVerificationEmail = async (recipientEmail, username, verificati
       <body>
         <div class="container">
           <div class="header">
-            <h1>🎨 Welcome to Unix!</h1>
+            <h1>🎨 Welcome to IbonnI!</h1>
           </div>
           <div class="content">
             <h2>Hello ${username}! 👋</h2>
-            <p>Thank you for registering with Unix - your creative marketplace platform.</p>
-            <p>To complete your registration and start posting your amazing artworks and inventions, 
+            <p>Thank you for registering with IbonnI Systems - Where technology meets its creators.</p>
+            <p>To complete your registration to be with us on board of this amazing journey, 
                please verify your email address by clicking the button below:</p>
             
             <div style="text-align: center;">
@@ -352,7 +352,7 @@ export const sendPasswordResetEmail = async (recipientEmail, username, resetToke
 
   sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL };
   sendSmtpEmail.to = [{ email: recipientEmail, name: username }];
-  sendSmtpEmail.subject = "Password Reset Request - Unix Platform";
+  sendSmtpEmail.subject = "Password Reset Request - IbonnI Systems";
   sendSmtpEmail.htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -377,7 +377,7 @@ export const sendPasswordResetEmail = async (recipientEmail, username, resetToke
           </div>
           <div class="content">
             <h2>Hello ${username},</h2>
-            <p>We received a request to reset your password for your Unix account.</p>
+            <p>We received a request to reset your password for your IbonnI account.</p>
             <p>Click the button below to reset your password:</p>
             
             <div style="text-align: center;">
@@ -424,7 +424,7 @@ export const sendWelcomeEmail = async (recipientEmail, username, role) => {
     <html>
       <body style="font-family: Arial, sans-serif;">
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #667eea;">Welcome to IbonnI, ${username}! 🎨</h1>
+          <h1 style="color: #667eea;">Welcome to IbonnI Systems, ${username}! 🎨</h1>
           <p>Your email has been verified successfully!</p>
           
           <div style="background: #f0f7ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
@@ -477,7 +477,7 @@ export const sendLoginNotification = async (recipientEmail, username, loginDetai
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2>🔐 New Login Detected</h2>
           <p>Hello ${username},</p>
-          <p>We detected a new login to your Unix account:</p>
+          <p>We detected a new login to your IbonnI account:</p>
           
           <div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
             <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
