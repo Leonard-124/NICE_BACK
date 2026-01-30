@@ -312,10 +312,10 @@ export const sendVerificationEmail = async (recipientEmail, username, verificati
               <strong>⏰ Important:</strong> This verification link will expire in 24 hours.
             </div>
             
-            <p>If you didn't create an account with Unix, please ignore this email.</p>
+            <p>If you didn't create an account with IBONNIS, please ignore this email.</p>
           </div>
           <div class="footer">
-            <p>© ${new Date().getFullYear()} Unix Platform. All rights reserved.</p>
+            <p>© ${new Date().getFullYear()} IBONNI Systems. All rights reserved.</p>
             <p>This is an automated email, please do not reply.</p>
           </div>
         </div>
@@ -323,7 +323,7 @@ export const sendVerificationEmail = async (recipientEmail, username, verificati
     </html>
   `;
   sendSmtpEmail.textContent = `
-    Welcome to Unix, ${username}!
+    Welcome to IBONNIS, ${username}!
     
     To verify your email, visit: ${verificationUrl}
     
@@ -377,7 +377,7 @@ export const sendPasswordResetEmail = async (recipientEmail, username, resetToke
           </div>
           <div class="content">
             <h2>Hello ${username},</h2>
-            <p>We received a request to reset your password for your IbonnI account.</p>
+            <p>We received a request to reset your password for your IbonnIs account.</p>
             <p>Click the button below to reset your password:</p>
             
             <div style="text-align: center;">
@@ -430,9 +430,9 @@ export const sendWelcomeEmail = async (recipientEmail, username, role) => {
           <div style="background: #f0f7ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
             <h3>🚀 Get Started:</h3>
             <ul>
-              <li><strong>Post Your Work:</strong> Share your artworks and inventions</li>
-              <li><strong>Connect:</strong> Message other creators</li>
-              <li><strong>Sell:</strong> Start earning from your creations</li>
+              <li><strong>Are you a builder:</strong> Share your projects with us and lets build together.</li>
+              <li><strong>Join:</strong>Be part of the IBONNIS community</li>
+              <li><strong>Innovators:</strong> Start sharing your inventions with us.</li>
               ${role === 'admin' ? '<li><strong>Admin Access:</strong> Manage the platform</li>' : ''}
               ${role === 'manager' ? '<li><strong>Manager Access:</strong> Moderate content</li>' : ''}
             </ul>
@@ -469,7 +469,7 @@ export const sendLoginNotification = async (recipientEmail, username, loginDetai
 
   sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL };
   sendSmtpEmail.to = [{ email: recipientEmail, name: username }];
-  sendSmtpEmail.subject = "New Login to Your Unix Account";
+  sendSmtpEmail.subject = "New Login to Your IBONNIS Account";
   sendSmtpEmail.htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -477,7 +477,7 @@ export const sendLoginNotification = async (recipientEmail, username, loginDetai
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2>🔐 New Login Detected</h2>
           <p>Hello ${username},</p>
-          <p>We detected a new login to your IbonnI account:</p>
+          <p>We detected a new login to your IbonnIs account:</p>
           
           <div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
             <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
