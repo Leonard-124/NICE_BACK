@@ -256,7 +256,7 @@ apiKey.apiKey = process.env.BREVO_API_KEY;
 
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 const FROM_EMAIL = process.env.FROM_EMAIL || "loluoch710@gmail.com";
-const FROM_NAME = process.env.FROM_NAME || "IbonnI";
+const FROM_NAME = process.env.FROM_NAME || "Ibonnis";
 
 /**
  * Send email verification
@@ -268,7 +268,7 @@ export const sendVerificationEmail = async (recipientEmail, username, verificati
 
   sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL };
   sendSmtpEmail.to = [{ email: recipientEmail, name: username }];
-  sendSmtpEmail.subject = "Verify Your Email - IbonnI Systems";
+  sendSmtpEmail.subject = "Verify Your Email - Ibonnis";
   sendSmtpEmail.htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -291,11 +291,11 @@ export const sendVerificationEmail = async (recipientEmail, username, verificati
       <body>
         <div class="container">
           <div class="header">
-            <h1>🎨 Welcome to IbonnI!</h1>
+            <h1>Welcome to Ibonnis</h1>
           </div>
           <div class="content">
             <h2>Hello ${username}! 👋</h2>
-            <p>Thank you for registering with IbonnI Systems - Where technology meets its creators.</p>
+            <p>Thank you for registering with Ibonnis - Where we reimagine the future.</p>
             <p>To complete your registration to be with us on board of this amazing journey, 
                please verify your email address by clicking the button below:</p>
             
@@ -315,7 +315,7 @@ export const sendVerificationEmail = async (recipientEmail, username, verificati
             <p>If you didn't create an account with IBONNIS, please ignore this email.</p>
           </div>
           <div class="footer">
-            <p>© ${new Date().getFullYear()} IBONNI Systems. All rights reserved.</p>
+            <p>© ${new Date().getFullYear()} Ibonnis. All rights reserved.</p>
             <p>This is an automated email, please do not reply.</p>
           </div>
         </div>
@@ -323,7 +323,7 @@ export const sendVerificationEmail = async (recipientEmail, username, verificati
     </html>
   `;
   sendSmtpEmail.textContent = `
-    Welcome to IBONNIS, ${username}!
+    Welcome to Ibonnis, ${username}!
     
     To verify your email, visit: ${verificationUrl}
     
@@ -352,7 +352,7 @@ export const sendPasswordResetEmail = async (recipientEmail, username, resetToke
 
   sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL };
   sendSmtpEmail.to = [{ email: recipientEmail, name: username }];
-  sendSmtpEmail.subject = "Password Reset Request - IbonnI Systems";
+  sendSmtpEmail.subject = "Password Reset Request - Ibonnis";
   sendSmtpEmail.htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -377,7 +377,7 @@ export const sendPasswordResetEmail = async (recipientEmail, username, resetToke
           </div>
           <div class="content">
             <h2>Hello ${username},</h2>
-            <p>We received a request to reset your password for your IbonnIs account.</p>
+            <p>We received a request to reset your password for your Ibonnis account.</p>
             <p>Click the button below to reset your password:</p>
             
             <div style="text-align: center;">
@@ -418,13 +418,13 @@ export const sendWelcomeEmail = async (recipientEmail, username, role) => {
 
   sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL };
   sendSmtpEmail.to = [{ email: recipientEmail, name: username }];
-  sendSmtpEmail.subject = "Welcome to Unix - Get Started! 🎉";
+  sendSmtpEmail.subject = "Welcome to Ibonnis - Get Started! 🎉";
   sendSmtpEmail.htmlContent = `
     <!DOCTYPE html>
     <html>
       <body style="font-family: Arial, sans-serif;">
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #667eea;">Welcome to IbonnI Systems, ${username}! 🎨</h1>
+          <h1 style="color: #667eea;">Welcome to Ibonnis, ${username}! 🎨</h1>
           <p>Your email has been verified successfully!</p>
           
           <div style="background: #f0f7ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
@@ -469,7 +469,7 @@ export const sendLoginNotification = async (recipientEmail, username, loginDetai
 
   sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL };
   sendSmtpEmail.to = [{ email: recipientEmail, name: username }];
-  sendSmtpEmail.subject = "New Login to Your IBONNIS Account";
+  sendSmtpEmail.subject = "New Login to Your Ibonnis Account";
   sendSmtpEmail.htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -477,7 +477,7 @@ export const sendLoginNotification = async (recipientEmail, username, loginDetai
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2>🔐 New Login Detected</h2>
           <p>Hello ${username},</p>
-          <p>We detected a new login to your IbonnIs account:</p>
+          <p>We detected a new login to your Ibonnis account:</p>
           
           <div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
             <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>

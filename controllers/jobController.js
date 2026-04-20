@@ -68,7 +68,7 @@ export const updateJob = async(req, res) => {
     } catch(err) {
         res.status(500).json({err: err.message})
     }
-}
+} ///also some inconsistencies here.
 
 export const deleteJob = async (req, res) => {
     try{
@@ -83,7 +83,7 @@ export const deleteJob = async (req, res) => {
     } catch (err) {
         res.status(500).json({err: err.message})
     }
-}
+} ///some inconsistencies here about.
 
 
 

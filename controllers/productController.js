@@ -62,7 +62,7 @@ export const getProductById = async (req,res) => {
 export const updateProduct = async (req, res) => {
     try{
         const {name, description, category, quantity, oldPrice, newPrice} = req.body
-        const updates = {name, description, category, quantity, oldPrice, newPrice};
+        const updates = {name, description, category, quantity, oldPrice, newPrice};//</>
         if(req.file) {
             const products = await Product.findById(req.params.id);
             if(!products) return res.status(404).json({error: "Not found"})
@@ -74,7 +74,8 @@ export const updateProduct = async (req, res) => {
             folder: "Productss",
         });
 
-        updates.image = uploadResult.secure_url;
+        // updates.image = uploadResult.secure_url; </> check this!!!!
+        updates.imageUrl = uploadResult.secure_url;
         updates.publicId = uploadResult.public_id
         }
         const products = await Product.findByIdAndUpdate(req.params.id, updates, {new: true, runValidators: true});
@@ -95,14 +96,14 @@ export const deleteProduct = async (req, res) => {
         if(products.publicId) {
             await cloudinary.uploader.destroy(products.publicId)
         }
-        await products.deleteOne();
+        await products.deleteOne(); //removes doc_ from db.
         res.json({message: "Deleted successfully"})
     } catch (err) {
         res.status(500).json({error: err.message})
     }
 }
 
-// READ USER’S ARTWORKS
+// READ USER’S ARTWORKS </>this was not to be here
 export const getUserArtworks = async (req, res) => {
   console.log("req.auth.sub:", req.auth?.sub);
   console.log("req.params.auth0Id:", req.params.auth0Id);

@@ -37,8 +37,8 @@ export const updateProfile = async (req, res) => {
     }
 
     // Update only provided fields
-    if (username) user.username = username;
-    if (email) user.email = email;
+    if (username) user.username = username;  //</>
+    if (email) user.email = email; // </>
 
     await user.save();
 

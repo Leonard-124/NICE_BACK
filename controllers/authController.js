@@ -49,7 +49,7 @@ export const register = async (req, res) => {
 
     // Check if user exists
     const existingUser = await User.findOne({
-      $or: [{ email }, { username }],
+      $or: [{ email }, { username }], //Filter
     });
 
     if (existingUser) {
@@ -113,7 +113,7 @@ export const verifyEmail = async (req, res) => {
 
     const user = await User.findOne({
       emailVerificationToken: hashedToken,
-      emailVerificationExpires: { $gt: Date.now() },
+      emailVerificationExpires: { $gt: Date.now() },//filter operator $gt, $lt, $or, $gte, $set,$in, $out, 
     });
 
     if (!user) {
@@ -155,7 +155,7 @@ export const resendVerification = async (req, res) => {
   try {
     const { email } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email });//finds one _doc
 
     if (!user) {
       return res.status(404).json({
@@ -207,7 +207,7 @@ export const login = async (req, res) => {
     // Find user (include password for verification)
     const user = await User.findOne({
       $or: [{ username }, { email: username }],
-    }).select("+password");
+    }).select("+password"); //adds password for
 
     if (!user) {
       return res.status(401).json({
@@ -471,7 +471,7 @@ export const logout = (req, res) => {
  */
 export const getCurrentUser = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id).select("-password"); //excludes password sort of.
 
     if (!user) {
       return res.status(404).json({
