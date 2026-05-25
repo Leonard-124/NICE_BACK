@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
       default: "user",
     },
     isEmailVerified: {
-      type: Boolean,
+      type: Boolean, //t/f
       default: false,
     },
     emailVerificationToken: String,
@@ -55,6 +55,8 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+
 
 // Hash password before saving
 userSchema.pre("save", async function (next) {

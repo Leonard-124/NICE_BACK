@@ -105,7 +105,7 @@ export const register = async (req, res) => {
 /**
  * Verify email
  */
-export const verifyEmail = async (req, res) => {
+export const verifyEmail = async (req, res) => { //error
   try {
     const { token } = req.params;
 
@@ -113,7 +113,7 @@ export const verifyEmail = async (req, res) => {
 
     const user = await User.findOne({
       emailVerificationToken: hashedToken,
-      emailVerificationExpires: { $gt: Date.now() },//filter operator $gt, $lt, $or, $gte, $set,$in, $out, 
+      emailVerificationExpires: { $gt: Date.now() },//filter operator 
     });
 
     if (!user) {
@@ -129,7 +129,7 @@ export const verifyEmail = async (req, res) => {
     await user.save();
 
     // Send welcome email
-    try {
+    try { //debug
       await sendWelcomeEmail(user.email, user.username, user.role);
     } catch (emailError) {
       console.error("Welcome email failed:", emailError);
