@@ -1,55 +1,93 @@
-import { resolve } from "node:dns";
 import feedback from "../models/feedback.mjs";
 import newsletter from "../models/newsletter.mjs";
-import mongoose from "mongoose";
 
-
-export const createfeedback = async(req, res) => {
-    try{
-        if(!message) {
-            return res.status(403).json({error: "Message is required"})
-        }
-        const {message, email} = req.body;
-        const create = new feedback({message, email})
-        await create.save();
-        res.status(201).json(create)
-
-    } catch (err) {
-        console.error(err)
+// Create Feedback
+export const createFeedback = async (req, res) => {
+  try {
+    const { message, email } = req.body;
+    if (!message) {
+      return res.status(400).json({ error: "Message is required" });
     }
-}
 
-export const createnews = async(req, res) => {
-    const create = await new Promise(resolve, reject);
-    create.then(() => {
-        const {email} = req.body
-        const email = new newsletter({email})
-        await email.save()
-    }).catch(() => {
-        console.error
-    })
-}
+    const newFeedback = new feedback({ message, email });
+    await newFeedback.save();
+    res.status(201).json(newFeedback);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
+// Create Newsletter Subscription
+export const createNews = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
 
-export const getFeedback = async(req, res) => {
-    const get = await feedback.find().sort({createdAt: -1})
-    res.json(get)
-}
+    const newSubscription = new newsletter({ email });
+    await newSubscription.save();
+    res.status(201).json(newSubscription);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
-const getnews = async( req, res) => {
-    const get = (await newsletter.find()).sort({createdAt: -1})
-    res.json(get)
-}
+// Get Feedback
+export const getFeedback = async (req, res) => {
+  try {
+    const feedbacks = await feedback.find().sort({ createdAt: -1 });
+    res.json(feedbacks);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
-export const deleteFeedback = async(req, res) => {
+// Get Newsletter Subscriptions
+export const getNews = async (req, res) => {
+  try {
+    const subscriptions = await newsletter.find().sort({ createdAt: -1 });
+    res.json(subscriptions);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// Delete Feedback
+export const deleteFeedback = async (req, res) => {
+  try {
     const { id } = req.params;
-    const getId = await feedback.findById(id)
-    await getId.deleteOne()
-    res.status(201).json({message: "deleted successfully"})
-}
+    const feedbackDoc = await feedback.findById(id);
 
-export const deleteemail = async(req, res) => {
+    if (!feedbackDoc) {
+      return res.status(404).json({ error: "Feedback not found" });
+    }
+
+    await feedbackDoc.deleteOne();
+    res.status(200).json({ message: "Deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// Delete Newsletter Subscription
+export const deleteEmail = async (req, res) => {
+  try {
     const { id } = req.params;
-    const erase = await newsletter.findByIdAndDelete(id)
+    const deleted = await newsletter.findByIdAndDelete(id);
 
-}
+    if (!deleted) {
+      return res.status(404).json({ error: "Email not found" });
+    }
+
+    res.status(200).json({ message: "Deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};

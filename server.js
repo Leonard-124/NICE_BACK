@@ -10,6 +10,7 @@ import profileRoutes from "./routes/profileRoute.js"
 import authRouter from "./routes/authRoutes.js"
 import adminRoutes from "./routes/adminRoutes.js"
 import resend from "./routes/resend.js"
+import feednewRoute from "./routes/feednewRoute.js"
 
 
 dotenv.config()
@@ -25,6 +26,7 @@ app.use("/api/courses", courseRoute)
 app.use("/api", profileRoutes);
 app.use("/api/admin", adminRoutes); // NEW: Admin routes
 app.use("/", resend)
+app.use("/api", feednewRoute);
 
 
 

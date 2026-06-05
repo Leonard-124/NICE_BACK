@@ -3,7 +3,7 @@ import { stringify } from "node:querystring"
 
 const newsletterSchema = new mongoose.Schema({
     email: {
-        type: string,
+        type: String,
         required: true
     }
 },{timestamps: true})
