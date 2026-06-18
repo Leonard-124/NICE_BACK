@@ -1,0 +1,98 @@
+
+I must win. Ibonnis must prosper. We MUST win
+
+# Start with inspector (listens on default port 9229)
+node --inspect app.js
+
+# Break on first line of application
+node --inspect-brk app.js
+
+# Specify a custom port
+node --inspect=9222 app.js
+
+# Enable remote debugging (be careful with this in production)
+node --inspect=0.0.0.0:9229 app.js
+
+//watch node --watch Tests/server.cjs
+//node app.js arg1 arg2
+// console.log('First argument:', process.argv[2]);
+// console.log('Environment:', process.env.NODE_ENV || 'development');
+
+
+# Install and use different Node.js versions
+nvm install 18.16.0 # Install specific version
+nvm use 18.16.0 # Switch to version
+nvm ls # List installed versions
+
+# Common npm commands
+npm init # Initialize a new project
+npm install # Install dependencies
+npm update # Update packages
+npm audit # Check for vulnerabilities
+////////////////////////////////////////
+# Show Node.js version
+node --version # or -v
+
+# Show V8 version
+node --v8-options
+
+# Show command-line help
+node --help
+
+
+//////////////////////////////////
+# Check syntax without executing
+node --check app.js
+
+# Show stack traces for warnings
+node --trace-warnings app.js
+
+# Set max memory (in MB)
+node --max-old-space-size=4096 app.js
+
+# Preload a module before execution
+node --require dotenv/config app.js
+
+/////////////////////////////
+# Enable ES module loader
+node --experimental-modules app.mjs
+
+# Enable experimental features
+node --experimental-repl-await
+
+# Enable experimental worker threads
+node --experimental-worker
+
+Note: Node.js may not be the best choice for CPU-intensive tasks as they can block the event loop. For such cases, consider:
+Using worker threads
+Creating a microservice in a more suitable language
+Using native add-ons
+//
+Node.js is fast and efficient because it uses a non-blocking event loop and delegates heavy work to the system.
+
+This allows it to handle thousands of connections at the same time, with minimal resources.
+Key Benefits:
+Handles many concurrent connections efficiently
+Great for I/O-bound applications
+Uses JavaScript on both client and server
+Large ecosystem of packages (npm)
+
+//
+How the Event Loop Works
+Node.js follows these steps to handle operations:
+
+Execute the main script (synchronous code)
+Process any microtasks (Promises, process.nextTick)
+Execute timers (setTimeout, setInterval)
+Run I/O callbacks (file system, network operations)
+Process setImmediate callbacks
+Handle close events (like socket.on('close'))
+
+//
+The event loop processes different types of callbacks in this order:
+
+Timers: setTimeout, setInterval
+I/O Callbacks: Completed I/O operations
+Poll: Retrieve new I/O events
+Check: setImmediate callbacks
+Close: Cleanup callbacks (like socket.on('close'))
