@@ -11,11 +11,15 @@ import authRouter from "./routes/authRoutes.js"
 import adminRoutes from "./routes/adminRoutes.js"
 import resend from "./routes/resend.js"
 import feednewRoute from "./routes/feednewRoute.js"
+import "./instrument.js"
+import * as Sentry from "@sentry/node"
 
 
 dotenv.config()
 
 const app = express()
+Sentry.setupExpressErrorHandler(app)//
+
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
@@ -34,9 +38,25 @@ app.use("/api", feednewRoute);
 
 const PORT = process.env.PORT || 3000
 
-app.get("/", (req, res) =>{
-    res.send("Hello this is NICETEA you can apply for jobs learn courses and get certified")
-})
+// app.get("/", (req, res) =>{
+//     res.send("Hello this is NICETEA you can apply for jobs learn courses and get certified")
+// })
+
+app.get("/", function rootHandler(req, res) {
+  res.end("Welcome to Ibonnis company server!");
+});
+
+app.get("/debug-sentry", function mainHandler(req, res) { //sentry error-handler
+  throw new Error("My first Sentry error!");
+});
+
+// Optional fallthrough error handler
+app.use(function onError(err, req, res, next) {
+  // The error id is attached to `res.sentry` to be returned
+  // and optionally displayed to the user for support.
+  res.statusCode = 500;
+  res.end(res.sentry + "\n");
+});
 
 app.listen(PORT, () =>{
     connectDB()

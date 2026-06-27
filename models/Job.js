@@ -13,6 +13,17 @@ const jobSchema = new mongoose.Schema({
     available:{
         type:Boolean,
         required: true
+    },
+    contractType: {
+        type:String,
+        enum: ["remote" || "onSite" || "Hybrid"],
+        required: true
+    },
+    salary: {
+        type: String
+    },
+    period: {
+        type: String
     }
 },{timestamps:true})
 

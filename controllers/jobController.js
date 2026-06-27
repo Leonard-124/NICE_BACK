@@ -33,15 +33,15 @@ export const getOneJob = async(req, res) => {
 
 export const createJob = async (req, res) => {
   try {
-    const { title, description, available } = req.body;
+    const { title, description, available, contractType, salary, period } = req.body;
 
     // Validate input
-    if (!title || !description || available === undefined) {
+    if (!title || !description || available === undefined || contractType || salary || period) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
     // Create and save job
-    const job = new Job({ title, description, available });
+    const job = new Job({ title, description, available, contractType, salary, period });
     const savedJob = await job.save();
 
     // Success response
@@ -84,6 +84,21 @@ export const deleteJob = async (req, res) => {
         res.status(500).json({err: err.message})
     }
 } ///some inconsistencies here about.
-
-
-
+///////////////////////////////////////////////////
+// const Permission = async(req, res) => {
+//     try {
+//         const job = await Job.findById(req.params.id)
+//         if(job.contractType) {
+//     switch job.contractType:
+//        case job.contractType.enum === "remote":
+//            return res.json({message: "This job is remote"})
+//         case job.contractType.enum === "onSite":
+//             return res.json({message: "THis job is onSite"})
+//         case job.contractType.enum === "Hybrid":
+//             return res.json({message: "THis job is hybrid"})
+//         }
+//     } catch(err) {
+//         res.status(500).json({error: "Error analyzing coontract types"})
+//     }
+// }
+/////////////////////////////////////////////////////////

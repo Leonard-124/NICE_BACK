@@ -8,7 +8,8 @@ const applicationSchema = new mongoose.Schema({
     linkedin: {type: String},
     portfolio: {type: String},
     message: {type: String},
-    resumeUrl: {type: String, required: true}
+    resumeUrl: {type: String, required: true},
+    coverletter: {type: String}
 }, {timestamps: true}
 );
 
