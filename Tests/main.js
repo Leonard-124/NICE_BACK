@@ -91,33 +91,131 @@
 //     console.error(err.code)
 // })
 ///////////////////////////////////////
-const fs = require("fs");
+// const fs = require("fs");
 
-function readConfigFile(filename, callback) {
-    fs.readFile(filename, 'utf8', (err, data) => {
-        if (err) {
-            if(err.code === "ENOENT") {
-                return callback(new Error(`Config file ${filename} not found`));
-            } else if (err.code === 'EACCESS') {
-                return callback(new Error(`No permission to read ${filename}`));
-            }
-            return callback(err); //For all errors
-        }
+// function readConfigFile(filename, callback) {
+//     fs.readFile(filename, 'utf8', (err, data) => {
+//         if (err) {
+//             if(err.code === "ENOENT") {
+//                 return callback(new Error(`Config file ${filename} not found`));
+//             } else if (err.code === 'EACCESS') {
+//                 return callback(new Error(`No permission to read ${filename}`));
+//             }
+//             return callback(err); //For all errors
+//         }
 
-        try {
-            const config = JSON.parse(data)
-            callback(null, config);
-        } catch (parseError) {
-            callback(new Error(`Invalid JSON in ${filename}`));
-        }
-    });
+//         try {
+//             const config = JSON.parse(data)
+//             callback(null, config);
+//         } catch (parseError) {
+//             callback(new Error(`Invalid JSON in ${filename}`));
+//         }
+//     });
+// }
+
+// readConfigFile('config.json', (err, config) => {
+//     if (err) {
+//         console.error('Failed to read config:', err.message);
+//         return
+//     }
+//     console.log('Config loaded successfully:', config);
+// });
+/////////////////////////////////////////////////////
+
+// const fs = require('fs').promises;
+
+// async function loadUserData(userId) {
+//     try {
+//         const data = await fs.readFile(`users/${userId}.json`, 'utf8');
+//         const user = JSON.parse(data)
+
+//         if(!user.email) {
+//             throw new Error("Invalid user data: missing email");
+//         }
+
+//         return user;
+//     } catch (error) {
+//         //Handle different error types
+//         if (error.code === 'ENOENT') {
+//             throw new Error(`User ${userId} not found`);;
+            
+//         } else if (error instanceof SyntaxError) {
+//             throw new Error("Invalid user data format");
+//         }
+//         // Re-throw other errors
+//         throw error;
+//     } finally {
+//         //Cleanup code that runs whether successful or not
+//         console.log(`Finished processing user ${userId}`);
+//     }
+// }
+
+// //Usage
+// (async () => {
+//     try {
+//         const user = await loadUserData(123);
+//         console.log('User loaded', user);
+//     } catch (error) {
+//         console.error('Failed to load user:', error.message);
+//         //Handle error (e.g, show to user, retry, etc)
+//     }
+// })();
+//////////////////////////////////
+//Global Error Handlers
+
+// process.on('uncaughtException', (error) => {
+//     console.error('UNCAUGHT EXCEPTION! Shutting down...')
+//     console.error(error.name, error.message);
+
+//     //Perform cleanup (close database connections)
+//     server.close(() => {
+//         console.log('Process terminated due to uncaught exception');
+//         proces.exit(1) //Exit with failure
+//     }) 
+// })
+// //Handle unhandled promise rejections
+// process.on('unhandledRejection', (reason, promise) => {
+//     console.error('UNHANDLED REJECTION! Shutting down...')
+//     console.error('Unhandled Rejection at:', promise, 'Reason:', reason);
+
+//     //Close server and exit
+//     server.close(() => {
+//         process.exit(1)
+//     });
+// });
+
+// //Exe
+// Promise.reject(new Error('Something went wrong'));
+
+// //Example of uncaught exception
+// setTimeout(() => {
+//     throw new Error('Uncaught exception after timeout');
+// }, 1000)
+///////////////////////////////
+
+//Custom Error Types
+
+class ValidationError extends Error {
+    constructor(message, field) {
+        super(message);
+        this.name = 'ValidationError';
+        this.field = field;
+        this.statusCode = 400;
+    }
 }
 
-readConfigFile('config.json', (err, config) => {
-    if (err) {
-        console.error('Failed to read config:', err.message);
-        return
+class NotFoundError extends Error {
+    constructor(resource) {
+        super(`${resource} not found`);
+        this.name = 'NotFoundError';
+        this.statusCode = 404;
     }
-    console.log('Config loaded successfully:', config);
-});
+}
 
+//Usage
+function getUser(id) {
+    if (!id) {
+        throw new ValidationError("User ID is required", "id");
+        
+    }
+}

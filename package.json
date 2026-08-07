@@ -20,12 +20,20 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.6.2",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.2",
     "morgan": "^1.10.1",
-    "multer": "^2.0.2"
+    "multer": "^2.0.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "jest": "^30.4.2",
+    "lint-staged": "^17.2.0",
     "nodemon": "^3.1.10"
   }
 }
